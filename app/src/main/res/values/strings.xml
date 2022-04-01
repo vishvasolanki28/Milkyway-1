@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Milkyway</string>
+    <string name="login">Login</string>
+    <!--    <string name="name">Name:</string>-->
+    <!--    <string name="e_mail">E-mail:</string>-->
+    <string name="password">Password:</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="signup">Signup</string>
+    <string name="name">Name:</string>
+    <string name="mo_no">Mo. No.:</string>
+    <string name="e_mail">E-mail:</string>
+    <string name="textview">TextView</string>
+    <string name="city">city</string>
+
+    <string name="prerak">prerak</string>
+    <string name="milkyway">MILKY WAY</string>
+    <string name="search">search_items....</string>
+    <string name="milk">MILK</string>
+    <string name="butter">BUTTER</string>
+    <string name="panner">PANEER</string>
+    <string name="cheese">CHEESE</string>
+    <string name="buttermilk">BUTTERMILK</string>
+    <string name="mayonnaise">MAYONNAISE</string>
+    <string name="dahi">DAHI</string>
+    <string name="home">HOME</string>
+    <string name="logout">LOGOUT</string>
+    <string name="dashboard">DASH-BOARD</string>
+    <string name="update">UPDATE</string>
+    <string name="navigation_open">Open Navigation Drawer</string>
+    <string name="navigation_close">Close navigation</string>
+    <string name="profile">Profile</string>
+
+
+    <string name="full_name">Full name</string>
+    <string name="prerak_patel">prerak patel</string>
+    <string name="email">Email</string>
+    <string name="registered_number">Registered Number</string>
+    <string name="retype_password">Retype-Password</string>
+    <string name="update_data">Update data</string>
+    <string name="registered_id">Registered-ID</string>
+    <string name="default_user">Default User</string>
+    <string name="order">ORDER</string>
+    <string name="completed">COMPLETED</string>
+    <string name="total_order">TOTAL ORDER</string>
+    <string name="add_item">ADD-ITEM</string>
+
+
+</resources>
