@@ -1,15 +1,17 @@
 package com.example.milkyway;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.milkyway.adapter.MyCartAdapter;
 import com.example.milkyway.eventbus.MyUpdateCartEvent;
@@ -32,7 +34,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CartActivity extends AppCompatActivity implements ICartLoadListener {
+public class    CartActivity extends AppCompatActivity implements ICartLoadListener {
 
     @BindView(R.id.recycler_cart)
     RecyclerView recyclerCart;
@@ -42,8 +44,11 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
     ImageView btnBack;
     @BindView(R.id.txtTotal)
     TextView textTotal;
+    private TextView textttl;
 
+    public static final String TEXT_TO_SEND = "com.example.Milkway.TEXT_TO_SEND";
     ICartLoadListener cartLoadListener;
+    //public float sum = 0;
 
     @Override
     protected void onStart() {
@@ -72,6 +77,7 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+        textttl = findViewById(R.id.txtTotal2);
         init();
         loadCartFromFirebase();
     }
@@ -120,20 +126,40 @@ public class CartActivity extends AppCompatActivity implements ICartLoadListener
 
     @Override
     public void onCartLoadSuccess(List<CartModel> cartModelList) {
-        double sum = 0;
+        double sum =0;
         for(CartModel cartModel : cartModelList)
         {
             sum+=cartModel.getTotalPrice();
 
         }
-        textTotal.setText(new StringBuilder("Rs.").append(sum));
+
+        textTotal.setText(String.valueOf(sum));
         MyCartAdapter adapter = new MyCartAdapter(this,cartModelList);
         recyclerCart.setAdapter(adapter);
+
+
     }
 
     @Override
     public void onCartLoadFailed(String message) {
         Snackbar.make(mainLayout,message,Snackbar.LENGTH_LONG).show();
 
+    }
+
+    public void Continue(View view) {
+
+        gotoactivity();
+
+    }
+
+    private void gotoactivity() {
+        String summ = textTotal.getText().toString();
+        Intent i = new Intent(CartActivity.this,shipping_address.class);
+        // Intent intent = new Intent(CartActivity.this,Payment.class);
+       // String sum  = String.valueOf(sum);
+        i.putExtra("total", summ);
+        //startActivity(intent);
+        startActivity(i);
+        finish();
     }
 }

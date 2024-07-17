@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -41,7 +40,7 @@ public class CustomerHome extends AppCompatActivity {
         l5 = findViewById(R.id.dahi);
         l6 = findViewById(R.id.buttermilk);
         drawerLayout = findViewById(R.id.drawerLayout);
-        navigationView=findViewById(R.id.navigationview);
+        /*navigationView=findViewById(R.id.navigationview);
 
         toolbar=findViewById(R.id.toolbar);
 
@@ -50,7 +49,7 @@ public class CustomerHome extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_open,R.string.navigation_close);
 
         drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        toggle.syncState();*/
 
 
         bottomNavigationView1=findViewById(R.id.bottom_navigator);
@@ -105,9 +104,9 @@ public class CustomerHome extends AppCompatActivity {
                         return true;
 
                     case R.id.order1:
-                        startActivity( new Intent(getApplicationContext(),order.class));
-                        overridePendingTransition(0,0);
-                        return true;
+                      startActivity( new Intent(getApplicationContext(),order.class));
+                      overridePendingTransition(0,0);
+                      return true;
 
                     case R.id.profile1:
                         startActivity( new Intent(getApplicationContext(),profile.class));
@@ -133,5 +132,11 @@ public class CustomerHome extends AppCompatActivity {
 
     public void addthis(View view) {
         startActivity(new Intent(CustomerHome.this,Additem.class));
+    }
+
+    public void cart(View view) {
+        Intent ij = new Intent(CustomerHome.this,CartActivity.class);
+        startActivity(ij);
+
     }
 }

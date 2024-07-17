@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+
+    android:layout_height="285dp"
     android:background="@color/teal_200"
     android:paddingLeft="21dp"
     android:paddingRight="21dp"
@@ -12,7 +13,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:text="UPDATE"
         android:textStyle="bold"
         android:textSize="32dp"
@@ -21,20 +22,20 @@
         android:textColor="@color/black"
         android:id="@+id/textupadate"
         android:layout_margin="21dp"/>
-
     <EditText
-        android:id="@+id/editprice"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="11dp"
-        android:background="@drawable/shape5"
+        android:layout_height="50dp"
         android:hint="Update Price"
+        android:background="@drawable/shape5"
+        android:paddingBottom="11dp"
+        android:id="@+id/editprice"
+        android:layout_marginBottom="11dp"
         android:inputType="text"
-        android:paddingBottom="11dp" />
+        />
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:hint="Update Quantity"
         android:background="@drawable/shape5"
         android:paddingBottom="11dp"
@@ -46,7 +47,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upadate"
+        android:text="Update"
         android:id="@+id/btnupadate"
         android:backgroundTint="@color/purple_700"
         android:layout_marginTop="11dp"

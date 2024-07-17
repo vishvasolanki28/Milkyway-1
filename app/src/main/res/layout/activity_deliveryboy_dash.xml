@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".deliveryboy_dash">
+
+    <RelativeLayout
+        android:id="@+id/relative1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/deliveryshape1"
+
+        tools:ignore="UselessParent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image1"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="-3dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/applogo" />
+        //app:shapeAppearanceOverlay="@style/roundedimageview"
+
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="35dp"
+
+            android:layout_toEndOf="@id/image1"
+            android:text="@string/milkyway"
+            android:textColor="@color/purple_700"
+            android:textSize="36dp"
+            android:textStyle="italic|bold"
+            tools:ignore="SpUsage" />
+    </RelativeLayout>
+    <ScrollView
+        android:id="@+id/scroll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relative1">
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/relative2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/scroll1">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/btn1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentBottom="true"
+            app:itemBackground="@color/teal_200"
+            app:itemIconTint="@drawable/selectordb"
+            app:itemTextColor="@drawable/selectordb"
+            app:menu="@menu/menudb"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

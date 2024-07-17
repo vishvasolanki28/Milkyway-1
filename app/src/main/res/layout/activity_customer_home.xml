@@ -11,13 +11,7 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/navigationview"
-        app:headerLayout="@layout/header1_nav"
-        app:menu="@menu/navigation_home"
-        android:layout_gravity="start"/>
+
 
 
 
@@ -25,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/layoutHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,12 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
 
-                tools:ignore="MissingConstraints" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,51 +46,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
-
-
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/white_rectangle_background"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                app:layout_constraintVertical_bias="0.0"
-                tools:layout_editor_absoluteX="10dp">
+                android:src="@drawable/ic_baseline_shopping_cart_24"
+                android:layout_marginStart="100dp"
+                android:onClick="cart"
+            />
 
 
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint="@string/search"
-                    android:imeOptions="actionSearch"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="15sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/search_homepage"
-                    android:contentDescription="@string/app_name"
-                    android:padding="10dp" />
-                <!--                android:src="@drawable/search_home"-->
-                <!--                android:tint="@color/colorPrimary"-->
 
 
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"

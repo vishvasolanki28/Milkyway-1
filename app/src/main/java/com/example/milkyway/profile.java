@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.milkyway.model.Complaintc;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +28,7 @@ public class profile extends AppCompatActivity {
     private Button btn_signout;
     DatabaseReference databaseReference;
     Customer customer;
+    String city;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +100,14 @@ public class profile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 customer = snapshot.getValue(Customer.class);
+
                 name.setText(customer.getName());
                 email.setText(customer.getEmail());
                 mono.setText(customer.getMono());
                 address.setText(customer.getAddress());
                 name1.setText(customer.getName());
+
+
 
             }
 
@@ -115,11 +120,21 @@ public class profile extends AppCompatActivity {
 
 
     public void openupdate(View view) {
-        startActivity(new Intent(profile.this, userupdate.class));
+        Intent intent = new Intent(profile.this,userupdate.class);
+        startActivity(intent);
+        finish();
 
     }
 
     public void onbackprofile(View view) {
-        startActivity(new Intent(profile.this, CustomerHome.class));
+        Intent intent = new Intent(profile.this,CustomerHome.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void complaint(View view) {
+        Intent ij = new Intent(profile.this, Complaint.class);
+        startActivity(ij);
+        finish();
     }
 }

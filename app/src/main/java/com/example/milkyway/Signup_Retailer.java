@@ -6,6 +6,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,22 +16,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import org.jetbrains.annotations.NotNull;
 
 public class Signup_Retailer extends AppCompatActivity {
 
-    private Button back_rsignup,submit_rsignup;
+    private Button submit_rsignup;
+    ImageView back_rsignup;
     private EditText email_rsignup,name_rsignup,pass_rsignup,shopname_rsignup,mono_rsignup,conpass_rsignup,city_rsignup,shopadd_rsignup,acc_rsignup,ifsc_rsignup;
     private FirebaseAuth mAuth;
     private FirebaseDatabase rootnode;
     private DatabaseReference reference;
-    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    //String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,18 +63,56 @@ public class Signup_Retailer extends AppCompatActivity {
             }
 
         });
-        submit_rsignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                registeruser();
-            }
-        });
+       submit_rsignup.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               registeruser();
+               //copyFirebaseData();
+           }
+       });
+
+
 
 
     }
+
+  /*  private void copyFirebaseData() {
+            DatabaseReference Stocknodes = FirebaseDatabase.getInstance().getReference().child("Stock");
+            DatabaseReference StockReal = FirebaseDatabase.getInstance().getReference().child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+            Stocknodes.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    for(DataSnapshot dataSnapshot: snapshot.getChildren())
+                    {
+                        String key = dataSnapshot.getKey();
+                        String name = dataSnapshot.child("name").getValue(String.class);
+                        String price = dataSnapshot.child("price").getValue(String.class);
+                        String quantity = dataSnapshot.child("quantity").getValue(String.class);
+                        String image = dataSnapshot.child("image").getValue(String.class);
+
+                        StockReal.child(key).child("name").setValue(name);
+                        StockReal.child(key).child("price").setValue(price);
+                        StockReal.child(key).child("quantity").setValue(quantity);
+                        StockReal.child(key).child("image").setValue(image);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                    Toast.makeText(Signup_Retailer.this, "Stock not created!!!", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+            });
+
+
+    }*/
+
     private void registeruser() {
 
-        copyFirebaseData();
+
 
         String name = name_rsignup.getText().toString().trim();
         String email = email_rsignup.getText().toString().trim();
@@ -124,7 +160,7 @@ public class Signup_Retailer extends AppCompatActivity {
             pass_rsignup.setError("password is required!!!");
             pass_rsignup.requestFocus();
         } else if (conpass.isEmpty()) {
-            conpass_rsignup.setError("please confrim password!!");
+            conpass_rsignup.setError("please conform password!!");
         } else if (!pass.equals(conpass)) {
             Toast.makeText(Signup_Retailer.this, "password is different", Toast.LENGTH_SHORT).show();
         } else {
@@ -132,9 +168,9 @@ public class Signup_Retailer extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Retailer retailer = new Retailer(name, email, mono, sname, address, city, acc, ifsc, pass);
+                        Retailer retailer = new Retailer(name,email,mono,sname,address,city,acc,ifsc,pass);
 
-                        FirebaseDatabase.getInstance().getReference("Retailers").child(uid).setValue(retailer).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        FirebaseDatabase.getInstance().getReference("Retailers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(retailer).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
@@ -152,40 +188,16 @@ public class Signup_Retailer extends AppCompatActivity {
                     }
                 }
             });
+
+
+            
+
         }
-    }
-
-    public void copyFirebaseData() {
-
-        //String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference StockNodes = FirebaseDatabase.getInstance().getReference().child("Stock");
-        final DatabaseReference StockReal = FirebaseDatabase.getInstance().getReference().child("StockReal").child(uid).child("Stock");
-
-       StockNodes.addListenerForSingleValueEvent(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren())
-                {
-                    String key = dataSnapshot.getKey();
-                    String name = dataSnapshot.child("name").getValue(String.class);
-                    String price = dataSnapshot.child("price").getValue(String.class);
-                    String quantity = dataSnapshot.child("quantity").getValue(String.class);
-                    String image = dataSnapshot.child("image").getValue(String.class);
-
-                    StockReal.child(key).child("name").setValue(name);
-                    StockReal.child(key).child("price").setValue(price);
-                    StockReal.child(key).child("quantity").setValue(quantity);
-                    StockReal.child(key).child("image").setValue(image);
-                }
-           }
-
-           @Override
-           public void onCancelled(@NonNull @NotNull DatabaseError error) {
-               Toast.makeText(Signup_Retailer.this, "Stock not created!!!", Toast.LENGTH_SHORT).show();
-
-           }
-       });
 
 
     }
-    }
+
+
+
+
+}

@@ -1,24 +1,30 @@
 package com.example.milkyway;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +34,9 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText email_login,name,password;
     private Button Loginbtn;
-    private Spinner spinner,spinner1;
+    private Spinner spinner1;
+    private TextView forgotTextLink;
+    DatabaseReference databaseReference;
 
 
 
@@ -44,8 +52,11 @@ public class LoginActivity extends AppCompatActivity {
         email_login = findViewById(R.id.email_login);
         password = findViewById(R.id.pass_login);
         Loginbtn = findViewById(R.id.Loginbtn);
-        spinner = findViewById(R.id.spinner);
+
         spinner1 = findViewById(R.id.spinner2);
+        forgotTextLink = findViewById(R.id.forgotpassword);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("AllUsers");
 
         Loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         List<String> Roles1 = new ArrayList<>();
-        Roles1.add(0,"Login");
+        Roles1.add(0,"Choose Role");
         Roles1.add("Customer");
         Roles1.add("Retailer");
         Roles1.add("Delivery Boy");
@@ -67,58 +78,44 @@ public class LoginActivity extends AppCompatActivity {
 
         spinner1.setAdapter(dataadapter1);
 
-        List<String> Roles = new ArrayList<>();
-        Roles.add(0,"Sign up");
-        Roles.add("Customer");
-        Roles.add("Retailer");
-        Roles.add("Delivery Boy");
-
-        //Styler and populate spinner
-        ArrayAdapter<String> dataadapter;
-        dataadapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,Roles);
-
-        //dropdown layout stlye
-        dataadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        //attaching sipnner to adapter
-        spinner.setAdapter(dataadapter);
 
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        forgotTextLink.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+            public void onClick(View view) {
+                EditText resetMail = new EditText(view.getContext());
+                AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(view.getContext());
+                passwordResetDialog.setTitle("Reset Password?");
+                passwordResetDialog.setMessage("Enter Your Email To Recevied Reset Link?");
+                passwordResetDialog.setView(resetMail);
 
-                if(parent.getItemAtPosition(position).equals("Sign up")){
+                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //extract email & send mail
+                        String mail = resetMail.getText().toString();
+                        mAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(LoginActivity.this,"Reset Link Sent To Your Email",Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull @NotNull Exception e) {
+                                Toast.makeText(LoginActivity.this,"Error ! Reset Link is not Sent. " + e.getMessage(),Toast.LENGTH_SHORT).show();
 
-                    //do nothing
-                }
-                else{
-                    //on selecting a spinner item
-                    String item = parent.getItemAtPosition(position).toString();
-                    //show the selected
-//                    Toast.makeText(parent.getContext(), "Selected"+item, Toast.LENGTH_SHORT).show();
-                    //anything other action do here
-                    if(parent.getItemAtPosition(position).equals("Customer")){
-
-                        Intent intent = new Intent(LoginActivity.this,Signup_Customer.class);
-                        startActivity(intent);
+                            }
+                        });
                     }
-                    if(parent.getItemAtPosition(position).equals("Retailer")){
-                        Intent intent = new Intent(LoginActivity.this,Signup_Retailer.class);
-                        startActivity(intent);
-
+                });
+                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //close the dialog
                     }
-                   if(parent.getItemAtPosition(position).equals("Delivery Boy"))
-                    {
-                        Intent intent = new Intent(LoginActivity.this,Signup_DeliveryBoy.class);
-                        startActivity(intent);
-                    }
-                }
-            }
+                });
+                passwordResetDialog.create().show();
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                    //TO-DO autogenerated
             }
         });
     }
@@ -151,16 +148,23 @@ public class LoginActivity extends AppCompatActivity {
                     {
 
                         Toast.makeText(LoginActivity.this, "Login Successful!!!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this,CustomerHome.class));
+                        Intent intent = new Intent(LoginActivity.this,CustomerHome.class);
+                        startActivity(intent);
+                        finish();
                     }else if(task.isSuccessful() && item.equals("Retailer")){
 
                         Toast.makeText(LoginActivity.this, "Login Successful!!!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this,RetailerHome.class));
+                        Intent intent = new Intent(LoginActivity.this,RetailerHome.class);
+                        startActivity(intent);
+                        finish();
 
                     }else if(task.isSuccessful() && item.equals("Delivery Boy")){
 
                         Toast.makeText(LoginActivity.this, "Login Successful!!!", Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(LoginActivity.this,demohome.class));
+                        Intent intent = new Intent(LoginActivity.this,deliveryboy_dash.class);
+                        startActivity(intent);
+                        finish();
+
                     }
                     else{
                         Toast.makeText(LoginActivity.this, "Incorrect email or password", Toast.LENGTH_SHORT).show();
@@ -168,5 +172,11 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void signup(View view) {
+        Intent i =new Intent(LoginActivity.this, Signup_Customer.class);
+        startActivity(i);
+
     }
 }

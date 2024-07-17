@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +13,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Milkyway">
-        <activity android:name=".Additem"></activity>
+        <activity android:name=".Complaint"></activity>
+        <activity android:name=".Signup_Customer" />
+        <activity android:name=".dropdownmenu" />
+        <activity android:name=".Payment" />
+        <activity android:name=".shipping_address" />
+        <activity android:name=".DBupdate" />
+        <activity android:name=".total_db" />
+        <activity android:name=".profile_db" />
+        <activity android:name=".complete_db" />
+        <activity android:name=".deliveryboy_dash" />
+        <activity android:name=".retailerupdate" />
+        <activity android:name=".Additem" />
         <activity android:name=".profileretailer" />
         <activity android:name=".orderretailer" />
         <activity android:name=".RetailerHome" />
@@ -30,7 +42,6 @@
         <activity android:name=".demohome" />
         <activity android:name=".Signup_DeliveryBoy" />
         <activity android:name=".Signup_Retailer" />
-        <activity android:name=".Signup_Customer" />
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".MainActivity"
@@ -41,6 +52,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

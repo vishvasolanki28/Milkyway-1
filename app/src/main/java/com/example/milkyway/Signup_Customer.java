@@ -1,16 +1,16 @@
 package com.example.milkyway;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,11 +19,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Signup_Customer extends AppCompatActivity {
 
-    private Button back,submit;
+    private Button submit;
+    private ImageView back;
     private EditText email_signup,name_signup,password_signup,monumber_signup,conpaasword_signup,city_signup,address_signup;
-    private ProgressBar pb;
+
     private FirebaseAuth mAuth;
     private FirebaseDatabase rootnode;
     private DatabaseReference reference;
@@ -38,16 +41,17 @@ public class Signup_Customer extends AppCompatActivity {
         rootnode = FirebaseDatabase.getInstance();
         reference = rootnode.getReference("Customers");
 
+        reference = rootnode.getReference("AllUsers");
+
         name_signup = findViewById(R.id.name_signup);
         email_signup = findViewById(R.id.email_signup);
         monumber_signup = findViewById(R.id.mono_signup);
-        address_signup = findViewById(R.id.city_rsignup);
+        address_signup = findViewById(R.id.address_signup);
         city_signup = findViewById(R.id.city_signup);
         password_signup = findViewById(R.id.setpass_signup);
         conpaasword_signup = findViewById(R.id.conpass_signup);
         back = findViewById(R.id.back);
         submit = findViewById(R.id.submit_signup);
-        pb = findViewById(R.id.progressBar);
 
         //backbutton on click
         back.setOnClickListener(new View.OnClickListener() {
@@ -79,10 +83,12 @@ public class Signup_Customer extends AppCompatActivity {
         String pass = password_signup.getText().toString().trim();
         String conpass = conpaasword_signup.getText().toString().trim();
 
+        boolean isCustomer = true;
+
 
         if(name.isEmpty()){
-        name_signup.setError("name is required");
-        name_signup.requestFocus();
+            name_signup.setError("name is required");
+            name_signup.requestFocus();
 
         }else if(email.isEmpty())
         {
@@ -122,6 +128,15 @@ public class Signup_Customer extends AppCompatActivity {
                     {
                         Customer customer = new Customer(name,email,mono,address,city,pass);
 
+                        AllUsers allUsers = new AllUsers(name,email,pass,isCustomer);
+
+                        FirebaseDatabase.getInstance().getReference("AllUsers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(allUsers).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+
+                            }
+                        });
+
                         FirebaseDatabase.getInstance().getReference("Customers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -138,6 +153,12 @@ public class Signup_Customer extends AppCompatActivity {
                             }
                         });
 
+                        FirebaseDatabase.getInstance().getReference("AllUsers").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(allUsers).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+
+                            }
+                        });
 
                     }
                     else
@@ -150,6 +171,6 @@ public class Signup_Customer extends AppCompatActivity {
 
 
 
-        
+
     }
 }

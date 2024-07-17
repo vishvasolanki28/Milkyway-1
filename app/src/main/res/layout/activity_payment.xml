@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Payment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#03A9F4"
+        android:id="@+id/relativetitle">
+
+        <ImageButton
+            android:id="@+id/backshipping"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#03A9F4"
+
+            android:src="@drawable/backarrow"
+            />
+
+        <TextView
+            android:id="@+id/shipping"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+
+            android:layout_marginStart="45dp"
+            android:gravity="center"
+            android:text="@string/payment"
+            android:textColor="#FFFFFF"
+            android:textSize="36dp"
+            android:textStyle="bold|italic"
+            tools:ignore="SpUsage" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativetitle"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp">
+
+
+        <LinearLayout
+            android:id="@+id/l5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="10dp"
+                android:text="@string/amount_to_pay"
+                android:textColor="@color/purple_700"
+                android:textSize="30dp"
+                android:textStyle="bold|italic"
+                tools:ignore="SpUsage" />
+
+            <TextView
+                android:id="@+id/text5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:textColor="@color/purple_700"
+                android:textSize="30dp"
+                android:textStyle="bold|italic"
+                tools:ignore="SpUsage" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearspinner"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/l5"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp">
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/style_spinner" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/l7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearspinner"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shippingshape">
+
+            <EditText
+                android:id="@+id/select_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="@string/select_date"
+                android:padding="10dp"
+                android:textColor="@color/purple_700"
+                android:textSize="30dp"
+                android:textStyle="bold|italic" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/l7"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shippingshape"
+            android:orientation="vertical"
+
+
+            android:padding="5dp">
+
+            <RadioGroup
+                android:id="@+id/radio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/pa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Payment "
+                    android:textColor="@drawable/text_color"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/radio_online"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:elevation="4dp"
+                    android:padding="16dp"
+                    android:textStyle="bold|italic"
+                    android:textSize="18dp"
+                    android:text="Online"
+                    android:textColor="@drawable/text_color" />
+
+                <RadioButton
+                    android:id="@+id/radio_cash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:elevation="4dp"
+                    android:padding="16dp"
+                    android:textStyle="bold|italic"
+                    android:textSize="18dp"
+                    android:text="Cash"
+                    android:textColor="@drawable/text_color" />
+
+
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/payament"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/shippingshape"
+
+            android:gravity="center"
+            android:text="@string/pay"
+            android:textColor="@color/black" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

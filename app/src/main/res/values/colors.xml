@@ -19,4 +19,15 @@
     <color name="colorTrendingEnd">#96C93D</color>
     <color name="colorDivider">#D6D6D6</color>
 
+    <color name="colorPrimary1">#003CBE</color>
+    <color name="colorPrimaryDark1">#003CBE</color>
+    <color name="colorAccent1">#10CEFF</color>
+    <color name="colortextprimary1">#212121</color>
+    <color name="coclortextsecondart1">#757575</color>
+    <color name="colorDivider1">#BDBDBD</color>
+    <color name="colorwhite1">#FFFFFF</color>
+    <color name="signupColor">#003CBE</color>
+
+
+
 </resources>

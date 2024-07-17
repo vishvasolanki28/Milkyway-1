@@ -27,6 +27,28 @@
                     android:src="@drawable/backarrow"
                     tools:ignore="ContentDescription"
                     android:onClick="onbackprofile"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="190dp"
+                    android:text="Complaint"
+                    android:textStyle="italic"
+                    android:textSize="18dp"
+                    />
+
+                <ImageView
+                    android:id="@+id/complainthere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:padding="15dp"
+                    android:src="@drawable/ic_baseline_question_answer_24"
+                    tools:ignore="ContentDescription"
+                    android:onClick="complaint"/>
+
+
             </LinearLayout>
 
             <RelativeLayout

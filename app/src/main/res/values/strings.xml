@@ -45,6 +45,45 @@
     <string name="completed">COMPLETED</string>
     <string name="total_order">TOTAL ORDER</string>
     <string name="add_item">ADD-ITEM</string>
+    <string name="pending">pending</string>
+
+    <string name="shipping_address">SHIPPING ADDRESS</string>
+    <string name="add">Address:</string>
+    <string name="phone">Phone:</string>
+    <string name="temporary_address">TEMPORARY ADDRESS</string>
+    <string name="default_address">DEFAULT ADDRESS</string>
+    <string name="amount_to_pay"> AMOUNT TO PAY:</string>
+    <string name="order_now">Order Now!!</string>
+    <string name="select_retailer">SELECT RETAILER</string>
+    <string name="payment">PAYMENT</string>
+    <string name="checkout_with_upi">Checkout with UPI</string>
+    <string name="upi">UPI</string>
+    <string name="cash_on_delivery">CASH-ON DELIVERY</string>
+    <string name="pay">PAY</string>
+    <string name="forget_password">Forget Password ?</string>
+
+    <string name="log_in">Log In</string>
+
+    <string name="create_a_new_account">Create a new account</string>
+    <string name="username">Username</string>
+    <string name="mobile">Mobile</string>
+    <string name="address">Address</string>
+    <string name="re_type_password">Re-Type password</string>
+
+    <string name="addhar_number">Addhar Number</string>
+    <string name="aaddhar_card">Aaddhar CARD</string>
+    <string name="account_number">Account Number</string>
+    <string name="account">Account</string>
+    <string name="ifsc_code">IFSC CODE</string>
+    <string name="ifsc">IFSC</string>
+    <string name="confirm">CONFIRM</string>
+    <string name="register">Register</string>
+
+    <string name="create_a_new_account_delivery_boys">Create a new account delivery boys</string>
+    <string name="create_account">Create Account</string>
+    <string name="create_a_new_account_retailer">Create a new account retailer</string>
+    <string name="shop_name">Shop Name</string>
+    <string name="select_date">select date</string>
 
 
 </resources>
